@@ -9,3 +9,5 @@ Released pocs in this repo:
 - [TerraMaster RCE](terramaster) &nbsp;(2026-05-18)
 
 Forked by [V12](https://github.com/v12-security/pocs) original repository
+
+All PoCs in this repo are based on already publicly known bugs/patches.
