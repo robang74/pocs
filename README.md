@@ -8,6 +8,7 @@ Released pocs in this repo:
 - [DirtyDecrypt CBC](dirtydecrypt) &nbsp;(2026-05-17)
 - [TerraMaster RCE](terramaster) &nbsp;(2026-05-18)
 - [Pin Theft](pintheft) &nbsp;(2026-05-19)
+- [Thor Chain](thorchain/20260602) &nbsp;(2026-06-02)
 
 Forked by [V12](https://github.com/v12-security/pocs) original repository
 
