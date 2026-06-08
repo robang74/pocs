@@ -1,10 +1,12 @@
 # FirefUXSS: Universal XSS in Firefox Focus for iOS via Redirect-Scheme Validation Race Condition
 
-FirefUXSS was discovered with [V12](https://v12.sh) by @RenwaX23 of the [V12 security team](https://x.com/v12sec).
+FirefUXSS was discovered with [V12](https://v12.sh) by [@RenwaX23](https://x.com/RenwaX23) of the [V12 security team](https://x.com/v12sec).
 
 > Want to find issues like this in your own code? Try V12 at [v12.sh](https://v12.sh).
 
 **Status:** 0-day, responsibly disclosed. After remaining unpatched for 11 months, we are now releasing our PoC (see Timeline below).
+
+https://github.com/user-attachments/assets/23604288-9085-43b3-ad98-75fee26e47da
 
 ## Proof of Concept
 
@@ -99,4 +101,4 @@ In a weaponized version, step 6 is replaced with script that reads cookies/token
 
 ## Disclosure
 
-We are publishing this advisory after a disclosure window of 11 months months has elapsed. Users of Firefox Focus for iOS should exercise caution until a patch is released.
+Maintainers are busy and the folks at Mozilla are wonderful people, but we are publishing this advisory after a disclosure window of 11 months months has elapsed. Users of Firefox Focus for iOS should exercise caution until a patch is released.
