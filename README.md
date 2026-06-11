@@ -9,6 +9,7 @@ Released pocs in this repo:
 - [TerraMaster RCE](terramaster) &nbsp;(2026-05-18)
 - [Pin Theft](pintheft) &nbsp;(2026-05-19)
 - [Thor Chain](thorchain/20260602) &nbsp;(2026-06-02)
+- [Firefox U-XSS](firefox) &nbsp;(2026-06-08)
 
 Forked by [V12](https://github.com/v12-security/pocs) original repository
 
